@@ -20,7 +20,11 @@ import {
 import Image from "next/image";
 import { use, useEffect, useState, useTransition } from "react";
 import axios from "axios";
-import { checkForImage } from "@/lib/validations";
+import { checkForImage } from "@/lib/image";
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/header";
+import { SearchBar } from "@/components/searchBar";
+import Link from "next/link";
 
 interface PostType {
   _id: string;
@@ -48,11 +52,9 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="grid grid-rows-[80px_1fr] items-start justify-items-start min-h-screen p-2 py-10 gap-8 max-w-[1024px] mx-auto font-[family-name:var(--font-geist-sans)]">
-      <header className="flex items-start justify-start flex-col gap-3 w-full">
-        <a href="/" className="font-[family-name:var(--font-geist-sans)] text-[24px] font-medium">FixFinder</a>
-        <Input type="text" placeholder="What are you looking for?" />
-      </header>
+    <div className="grid grid-rows-[30px_40px_1fr] items-start justify-items-start min-h-screen p-2 py-10 gap-8 max-w-[1024px] mx-auto font-[family-name:var(--font-geist-sans)]">
+      <Header />
+      <SearchBar />
       <main className="flex flex-wrap gap-2 items-start justify-start w-full">
         {/* <Image
           className="dark:invert"
@@ -69,7 +71,7 @@ export default function Home() {
               <CardDescription>{post.description}</CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-end">
-              <a href={`/posts/${post.slug}`} className="hover:underline hover:underline-offset-4">Acessar {`->`}</a>
+              <Link href={`/posts/${post.slug}`} className="hover:underline hover:underline-offset-4">Acessar {`->`}</Link>
             </CardFooter>
           </Card>
         ))}

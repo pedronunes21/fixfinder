@@ -1,5 +1,5 @@
 "use client"
-import { checkForImage } from "@/lib/validations";
+import { checkForImage } from "@/lib/image";
 import axios from "axios";
 import { use, useEffect, useState, useTransition } from "react";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Header } from "@/components/header";
+import { SearchBar } from "@/components/searchBar";
 
 interface SingleParams {
     params: Promise<{ slug: string }>
@@ -46,23 +48,20 @@ export default function Page({ params }: SingleParams) {
     if (isPending) return;
 
     return (
-        <div className="grid grid-rows-[80px_1fr] items-start justify-items-start min-h-screen p-2 py-10 gap-8 max-w-[1024px] mx-auto font-[family-name:var(--font-geist-sans)]">
-            <header className="flex items-start justify-start flex-col gap-3 w-full">
-                <a href="/" className="font-[family-name:var(--font-geist-sans)] text-[24px] font-medium">FixFinder</a>
-                <Input type="text" placeholder="What are you looking for?" />
-
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>{post?.title}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </header>
+        <div className="grid grid-rows-[30px_40px_10px_1fr] items-start justify-items-start min-h-screen p-2 py-10 gap-8 max-w-[1024px] mx-auto font-[family-name:var(--font-geist-sans)]">
+            <Header />
+            <SearchBar />
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{post?.title}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
 
             <main className="py-4">
                 <h1 className="text-[32px] font-bold">{post?.title}</h1>
